@@ -5,11 +5,10 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "../Board.h"
-#include "../AI.h"
 
 
 TEST(ClassDeclaration,BoardTestOperator) {
-   Board b=Board(8);
+    Board b=Board(8);
     EXPECT_TRUE(b.operator==(b));
     b.deleteAll();
 }
