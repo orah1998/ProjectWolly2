@@ -16,6 +16,7 @@ this->board=board;
 
  void AI::makeMove(int **offers,int size) {
     int sizeOfOffers=size;
+
      int minScore=sizeOfBoard*sizeOfBoard;
      for (int i = 0; i < sizeOfOffers; i++) {
          if(minScore>ScoreOfNextPlay(offers[i][0],offers[i][1])){
@@ -24,6 +25,7 @@ this->board=board;
              lastPlayedY=offers[i][1];
          }
      }
+
 board[lastPlayedX][lastPlayedY].ChangeValue(this->symbol);
 
 
