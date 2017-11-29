@@ -79,3 +79,14 @@ void Board::print(){
 
 }
 
+
+bool Board::operator==(const Board &board) const {
+    for (int i = 0; i < this->x_; ++i) {
+        for (int j = 0; j < this->x_; ++j) {
+            if(this->arr_[i][j].GetValue() != board.arr_[i][j].GetValue()){
+                return false;
+            }
+        }
+    }
+    return true;
+}

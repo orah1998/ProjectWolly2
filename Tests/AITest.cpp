@@ -22,11 +22,9 @@ TEST(ClassDeclaration,TestOfAIMoves) {
     GameLogics logic=GameLogics(b.getArrayOfCells(),b.getSizeOfArray());
     logic.NextMove('X');
     AI comp = AI(sizeOfBoard,board,symbol,name);
-    cout<<logic.GetSizeOfOffers()<<endl;
     comp.makeMove(logic.GetOffers(),logic.GetSizeOfOffers());
 
 
-    cout<<"H2"<<endl;
     //initialize AI_check
     Board b_check=Board(8);
     int sizeOfBoard_check=b_check.getSizeOfArray();
@@ -39,7 +37,8 @@ TEST(ClassDeclaration,TestOfAIMoves) {
     comp_check.makeMove(logic_check.GetOffers(),logic_check.GetSizeOfOffers());
 
     //check if the AI and he AI_check are did the same smart step
-    EXPECT_EQ(board,board_check);
+    EXPECT_EQ(b, b_check);
+    //EXPECT_TRUE(b == b_check);
 
     b.deleteAll();
     b_check.deleteAll();
