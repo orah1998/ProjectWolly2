@@ -19,10 +19,9 @@ TEST(ClassDeclaration,CellTestValue) {
     Player p = Player(b.getArrayOfCells(),'X',"bob");
 
 }
-TEST(ClassDeclaration,CellValueChange) {
+*/
+TEST(ClassDeclaration,PlyerValueChange) {
     Cell c = Cell(0,0);
     c.ChangeValue('x');
     EXPECT_TRUE(c.GetValue() == 'x');
 }
-
- */
