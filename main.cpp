@@ -11,14 +11,15 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-
+/*
 using namespace std;
 
 
-//int main(int argc,char* argv[]) {
-  //GameFlow gameFlow=GameFlow();
-    //gameFlow.run();
+int main(int argc,char* argv[]) {
+  GameFlow gameFlow=GameFlow();
+    gameFlow.run();
 
 
-  ///  return 0;
-//}
+   return 0;
+}
+ */

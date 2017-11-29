@@ -7,7 +7,7 @@
 #include "../Board.h"
 #include "../Player.h"
 #include "../GameLogics.h"
-
+/*
 TEST(ClassDeclaration,CellTestValue) {
     Board b=Board(8);
     int sizeOfBoard=b.getSizeOfArray();
@@ -24,3 +24,5 @@ TEST(ClassDeclaration,CellValueChange) {
     c.ChangeValue('x');
     EXPECT_TRUE(c.GetValue() == 'x');
 }
+
+ */
