@@ -9,7 +9,7 @@
 using namespace std;
 
 void Board::deleteAll(){
-    for (int i = 0; i < x_+1; i++) {
+    for (int i = 0; i < x_; i++) {
         delete[] arr_[i];
     }
     delete[] arr_;
