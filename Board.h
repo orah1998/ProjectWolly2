@@ -19,6 +19,9 @@ public :
     void print();
     Cell** getArrayOfCells();
     int getSizeOfArray();
+
+
+    bool operator ==(const Board &board) const;
 private :
     int x_;
     Cell** arr_;
