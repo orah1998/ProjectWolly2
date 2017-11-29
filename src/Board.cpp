@@ -3,8 +3,8 @@
 //208250746
 
 
-#include "Board.h"
-#include "Cell.h"
+#include "../include/Board.h"
+#include "../include/Cell.h"
 #include <iostream>
 using namespace std;
 

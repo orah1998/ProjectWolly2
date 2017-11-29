@@ -2,7 +2,7 @@
 // Or Aharoni
 //208250746
 
-#include "CellCollection.h"
+#include "../include/CellCollection.h"
 
 using namespace std;
 

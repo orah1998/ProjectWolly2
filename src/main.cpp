@@ -1,13 +1,13 @@
 // or aharoni 208250746
 
 #include <iostream>
-#include "Board.h"
+#include "../include/Board.h"
 #include "malloc.h"
-#include "Player.h"
-#include "CellCollection.h"
-#include "GameLogics.h"
-#include "Winner.h"
-#include "GameFlow.h"
+#include "../include/Player.h"
+#include "../include/CellCollection.h"
+#include "../include/GameLogics.h"
+#include "../include/Winner.h"
+#include "../include/GameFlow.h"
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 

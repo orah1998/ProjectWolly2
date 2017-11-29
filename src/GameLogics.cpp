@@ -2,12 +2,12 @@
 // Or Aharoni
 //208250746
 
-#include "GameLogics.h"
+#include "../include/GameLogics.h"
 #include <iostream>
-#include "Board.h"
+#include "../include/Board.h"
 #include "malloc.h"
-#include "Player.h"
-#include "CellCollection.h"
+#include "../include/Player.h"
+#include "../include/CellCollection.h"
 
  GameLogics::GameLogics(Cell **cells,int size) {
     this->cells=cells;

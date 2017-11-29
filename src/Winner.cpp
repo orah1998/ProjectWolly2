@@ -3,11 +3,11 @@
 //208250746
 
 #include <list>
-#include "Player.h"
+#include "../include/Player.h"
 #include <iostream>
-#include "CellCollection.h"
-#include "Cell.h"
-#include "Winner.h"
+#include "../include/CellCollection.h"
+#include "../include/Cell.h"
+#include "../include/Winner.h"
 
 
 Winner::Winner(Player* player11, Player* player22,Cell** cells,int size) {

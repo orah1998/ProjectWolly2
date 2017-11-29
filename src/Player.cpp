@@ -2,8 +2,8 @@
 // Or Aharoni
 //208250746
 
-#include "Player.h"
-#include "Cell.h"
+#include "../include/Player.h"
+#include "../include/Cell.h"
 
 #include <iostream>
 using namespace std;

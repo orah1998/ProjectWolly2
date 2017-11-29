@@ -2,7 +2,7 @@
 // Created by or on 23/11/17.
 //
 
-#include "AI.h"
+#include "../include/AI.h"
 
 
 AI::AI(int sizeOfBoard,Cell** board,char symbol,string name){
