@@ -10,7 +10,7 @@ TEST(ClassDeclaration,CellTestValue) {
     Cell c = Cell(0,0);
     EXPECT_TRUE(c.GetValue() == ' ');
 }
-TEST(ClassDeclaration,BoardInitilaizeTest) {
+TEST(ClassDeclaration,CellValueChange) {
     Cell c = Cell(0,0);
     c.ChangeValue('x');
     EXPECT_TRUE(c.GetValue() == 'x');
