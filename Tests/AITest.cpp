@@ -37,8 +37,7 @@ TEST(ClassDeclaration,TestOfAIMoves) {
     comp_check.makeMove(logic_check.GetOffers(),logic_check.GetSizeOfOffers());
 
     //check if the AI and he AI_check are did the same smart step
-    EXPECT_EQ(b, b_check);
-    //EXPECT_TRUE(b == b_check);
+    EXPECT_TRUE(b == b_check);
 
     b.deleteAll();
     b_check.deleteAll();
