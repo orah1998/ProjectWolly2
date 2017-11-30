@@ -37,7 +37,7 @@ void GameFlow::run() {
 
     cout<<"choose player2's name:"<<endl;
     cin >>name2;
-    Player player2=Player(b.getArrayOfCells(),'X',name2);
+    AI player2=AI(b.getSizeOfArray(),b.getArrayOfCells(),'X',name2);
     //Player player2=Player(b.getArrayOfCells(),'X',name2);
     Winner checker=Winner(&player1,&player2,b.getArrayOfCells(),b.getSizeOfArray());
     b.print();
