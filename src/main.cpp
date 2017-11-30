@@ -8,10 +8,10 @@
 #include "../include/GameLogics.h"
 #include "../include/Winner.h"
 #include "../include/GameFlow.h"
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
+//#include <gtest/gtest.h>
+//#include <gmock/gmock.h>
 
-/*
+
 using namespace std;
 
 
@@ -22,4 +22,3 @@ int main(int argc,char* argv[]) {
 
    return 0;
 }
- */
