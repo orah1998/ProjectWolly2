@@ -10,6 +10,7 @@ using namespace std;
 
 
 Player::Player(){
+
 }
 
 Player::Player(Cell** cellArray ,char symbol,string nickname){
@@ -23,7 +24,8 @@ string Player::GetName(){
 }
 
 
-char Player::getSymbol(){
+char Player::getSymbol()
+{
     return this->symbol;
 }
 

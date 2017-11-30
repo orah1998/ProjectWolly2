@@ -49,6 +49,7 @@ int AI::ScoreOfNextPlay(int x,int y){
         maxScore=calculateScore(tempOffers[i][0],tempOffers[i][0],boardCopy);
     }
     }
+    logic.deleteAll();
 deleteAll(boardCopy);
 return maxScore;
 

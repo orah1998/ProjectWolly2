@@ -12,8 +12,8 @@
 
 Winner::Winner(Player* player11, Player* player22,Cell** cells,int size) {
 
-    player1=player11;
-    player2=player22;
+    player1 = player11;
+    player2 = player22;
     this->cells=cells;
     this->size=size;
 }

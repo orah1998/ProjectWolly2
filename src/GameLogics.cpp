@@ -12,18 +12,16 @@
  GameLogics::GameLogics(Cell **cells,int size) {
     this->cells=cells;
     this->size=size;
-    offers=(int **)malloc(sizeof(int*)*size*size);
+    offers = (int **)calloc(sizeof(int*),(size*size));
     this->counter=0;
 
 }
 
 void GameLogics::deleteAll() {
-    for (int i = 0; i < counter; i++) {
-        delete[] offers[i];
+    for (int i = 0; i < size*size; i++) {
+        delete offers[i];
     }
     delete[] offers;
-
-
 }
 
 int GameLogics::GetSizeOfOffers(){
@@ -37,12 +35,13 @@ int** GameLogics::GetOffers() {
 
 
 void GameLogics::clean(){
-    for (int i = 0; i < counter; ++i) {
-        delete(offers[i]);
+
+    for (int i = 0; i < size*size; i++) {
+        delete[] offers[i];
     }
-    delete(offers);
+    delete[] offers;
     counter=0;
-    offers=(int **)malloc(sizeof(int*)*size*size);
+    offers=(int **)calloc(sizeof(int*),size*size);
 }
 
 
@@ -77,7 +76,7 @@ void GameLogics::PrintOffers(){
 
 
 void GameLogics::addOffer(int x,int y){
-    offers[counter]=(int *)malloc(sizeof(int)*2);
+    offers[counter]=(int *)calloc(sizeof(int),2);
     offers[counter][0]=x;
     offers[counter][1]=y;
     counter++;

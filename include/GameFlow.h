@@ -16,6 +16,7 @@
 class GameFlow{
 public:
     GameFlow();
+    int selection();
     void run();
     void deleteAll(Board b,GameLogics logic);
 private:

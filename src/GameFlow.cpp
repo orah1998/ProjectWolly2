@@ -17,6 +17,20 @@ GameFlow::GameFlow(){
 
     }
 
+int GameFlow::selection(){
+    cout<<"Please choose which to duel AI ( press 1 ) or other player ( press 2 )"<<endl;
+    int choose;
+    cin>>choose;
+    if(choose==1){return 1;}
+    if(choose==2){return 2;}
+    else{
+        cout<<"invalid input"<<endl;
+        return this->selection();
+    }
+}
+
+
+
 void GameFlow::deleteAll(Board b,GameLogics logic) {
     b.deleteAll();
     logic.deleteAll();
@@ -33,13 +47,24 @@ void GameFlow::run() {
     GameLogics logic=GameLogics(b.getArrayOfCells(),b.getSizeOfArray());
     cout<<"choose player1's name:"<<endl;
     cin >>name;
-    Player player1=Player(b.getArrayOfCells(),'O',name);
+    //AI player1 = AI(b.getSizeOfArray(),b.getArrayOfCells(),'O',"yair");
+    Player player1 = Player(b.getArrayOfCells(),'O',name);
 
-    cout<<"choose player2's name:"<<endl;
-    cin >>name2;
-    Player player2=Player(b.getArrayOfCells(),'X',name2);
-    //Player player2=Player(b.getArrayOfCells(),'X',name2);
-    Winner checker=Winner(&player1,&player2,b.getArrayOfCells(),b.getSizeOfArray());
+    Player *player2;
+    int choose=this->selection();
+    if(choose==1){
+        player2 = new AI(b.getSizeOfArray(),b.getArrayOfCells(),'X',"comp");
+    }
+    else{
+        cout<<"choose player2's name:"<<endl;
+        cin >>name2;
+        player2=new Player(b.getArrayOfCells(),'X',name2);
+
+    }
+
+
+
+    Winner checker=Winner(&player1,player2,b.getArrayOfCells(),b.getSizeOfArray());
     b.print();
 
 //flag is which player is currently playing
@@ -60,16 +85,17 @@ void GameFlow::run() {
             }
         }
         else{
-            logic.NextMove(player2.getSymbol());
+            logic.NextMove(player2->getSymbol());
+
             checker.GetCounter(logic.GetSizeOfOffers());
             if (checker.checkWinner() == true) {
                 flag = 2;
             } else {
                 logic.PrintOffers();
-                player2.makeMove(logic.GetOffers(),logic.GetSizeOfOffers());
+                player2->makeMove(logic.GetOffers(),logic.GetSizeOfOffers());
                 logic.clean();
                 flag = 1;
-                cellCollection.RunChecks(player2.getSymbol(),player2.getX(),player2.getY());
+                cellCollection.RunChecks(player2->getSymbol(),player2->getX(),player2->getY());
             }
         }
 
@@ -78,4 +104,5 @@ void GameFlow::run() {
     }
 
 deleteAll(b,logic);
+    delete player2;
 }
