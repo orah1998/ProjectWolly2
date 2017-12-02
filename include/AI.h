@@ -21,7 +21,7 @@ AI(int sizeOfBoard, Cell** board,char symbol,string name);
     void makeMove(int** offers,int size);
     int calculateScore(int x,int y, Cell** board);
     void deleteAll(Cell** board);
-    int getX();
+     int getX();
     int getY();
     char getSymbol();
     string GetName();

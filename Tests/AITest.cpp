@@ -4,8 +4,8 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "../Board.h"
-#include "../AI.h"
+#include "../include/Board.h"
+#include "../include/AI.h"
 
 
 TEST(ClassDeclaration,TestOfAIMoves) {

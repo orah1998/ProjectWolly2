@@ -2,14 +2,15 @@
 // Or Aharoni
 //208250746
 
-#include "Player.h"
-#include "Cell.h"
+#include "../include/Player.h"
+#include "../include/Cell.h"
 
 #include <iostream>
 using namespace std;
 
 
 Player::Player(){
+
 }
 
 Player::Player(Cell** cellArray ,char symbol,string nickname){
@@ -23,7 +24,8 @@ string Player::GetName(){
 }
 
 
-char Player::getSymbol(){
+char Player::getSymbol()
+{
     return this->symbol;
 }
 

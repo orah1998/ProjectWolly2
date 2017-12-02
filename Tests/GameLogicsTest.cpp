@@ -3,9 +3,9 @@
 //
 
 #include <gtest/gtest.h>
-#include "../Board.h"
-#include "../CellCollection.h"
-#include "../GameLogics.h"
+#include "../include/Board.h"
+#include "../include/CellCollection.h"
+#include "../include/GameLogics.h"
 
 //a test to check the offers that we should get after playing the first turn.
 TEST(ClassDeclaration,GameLogicsTest) {

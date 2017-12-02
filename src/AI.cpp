@@ -2,7 +2,7 @@
 // Created by or on 23/11/17.
 //
 
-#include "AI.h"
+#include "../include/AI.h"
 
 
 AI::AI(int sizeOfBoard,Cell** board,char symbol,string name){
@@ -49,6 +49,7 @@ int AI::ScoreOfNextPlay(int x,int y){
         maxScore=calculateScore(tempOffers[i][0],tempOffers[i][0],boardCopy);
     }
     }
+    logic.deleteAll();
 deleteAll(boardCopy);
 return maxScore;
 

@@ -4,9 +4,9 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "../CellCollection.h"
-#include "../Player.h"
-#include "../GameLogics.h"
+#include "../include/CellCollection.h"
+#include "../include/Player.h"
+#include "../include/GameLogics.h"
 
 
 

@@ -3,17 +3,17 @@
 //208250746
 
 #include <list>
-#include "Player.h"
+#include "../include/Player.h"
 #include <iostream>
-#include "CellCollection.h"
-#include "Cell.h"
-#include "Winner.h"
+#include "../include/CellCollection.h"
+#include "../include/Cell.h"
+#include "../include/Winner.h"
 
 
 Winner::Winner(Player* player11, Player* player22,Cell** cells,int size) {
 
-    player1=player11;
-    player2=player22;
+    player1 = player11;
+    player2 = player22;
     this->cells=cells;
     this->size=size;
 }

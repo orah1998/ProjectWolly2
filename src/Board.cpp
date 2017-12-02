@@ -3,8 +3,8 @@
 //208250746
 
 
-#include "Board.h"
-#include "Cell.h"
+#include "../include/Board.h"
+#include "../include/Cell.h"
 #include <iostream>
 using namespace std;
 
@@ -61,7 +61,8 @@ void Board::print(){
                 cout << "| "<< j << " | " ;
 
             }
-            cout << endl ;
+            cout << endl;
+            cout <<"-----------------------------------------------------"<< endl ;
         }
         else{
             for (int j = 0; j <x_ ;j++) {
@@ -72,8 +73,8 @@ void Board::print(){
                 }
 
             }
-
-            cout <<"--------------------------------"<< endl ;
+            cout << endl;
+            cout <<"-----------------------------------------------------"<< endl ;
         }
     }
 

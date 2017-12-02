@@ -14,19 +14,21 @@ using namespace std;
 class Player {
 public :
     Player();
-void makeMove(int** offers,int size);
+    virtual void makeMove(int** offers,int size);
     Player(Cell** cellArray,char symbol,string nickname);
-    char getSymbol();
+    virtual char getSymbol();
     bool IsFound(int** offers,int x,int y);
-    string GetName();
-    int getX();
-    int getY();
+    virtual string GetName();
+    virtual int getX();
+    virtual int getY();
         private:
-    char symbol;
     int indexX;
     int indexY;
     string name;
     int counter;
     Cell** cells;
+protected:
+    char symbol;
+
 };
 #endif //UNTITLED_PLAYER_H

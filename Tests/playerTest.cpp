@@ -4,9 +4,9 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "../Board.h"
-#include "../Player.h"
-#include "../GameLogics.h"
+#include "../include/Board.h"
+#include "../include/Player.h"
+#include "../include/GameLogics.h"
 /*
 TEST(ClassDeclaration,CellTestValue) {
     Board b=Board(8);
@@ -19,10 +19,9 @@ TEST(ClassDeclaration,CellTestValue) {
     Player p = Player(b.getArrayOfCells(),'X',"bob");
 
 }
-TEST(ClassDeclaration,CellValueChange) {
+*/
+TEST(ClassDeclaration,PlyerValueChange) {
     Cell c = Cell(0,0);
     c.ChangeValue('x');
     EXPECT_TRUE(c.GetValue() == 'x');
 }
-
- */
