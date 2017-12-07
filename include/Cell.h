@@ -14,6 +14,10 @@ public :
     Cell(int x ,int y);
     void ChangeValue(char symbol);
     char GetValue();
+    int getX();
+    int getY();
+    char* cellToString();
+    void StringToCell(string answer);
 private :
     int x_;
     int y_;

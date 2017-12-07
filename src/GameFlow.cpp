@@ -11,6 +11,7 @@
 #include "../include/Winner.h"
 #include "../include/GameFlow.h"
 #include "../include/AI.h"
+#include "../include/ServerPlayer.h"
 
 
 GameFlow::GameFlow(){
@@ -18,11 +19,15 @@ GameFlow::GameFlow(){
     }
 
 int GameFlow::selection(){
-    cout<<"Please choose which to duel AI ( press 1 ) or other player ( press 2 )"<<endl;
+    cout<<"Choose an opponent type:"<<endl;
+    cout<<"1. a human local player"<<endl;
+    cout<<"2. an AI player"<<endl;
+    cout<<"3. a remote player"<<endl;
     int choose;
     cin>>choose;
     if(choose==1){return 1;}
     if(choose==2){return 2;}
+    if(choose==3){return 3;}
     else{
         cout<<"invalid input"<<endl;
         return this->selection();
@@ -38,71 +43,119 @@ void GameFlow::deleteAll(Board b,GameLogics logic) {
 
 void GameFlow::run() {
     int x;
-    cout <<"Choose size : "<< endl ;
+    cout << "Choose size : " << endl;
     cin >> x;
     string name;
     string name2;
     Board b(x);
-    CellCollection cellCollection=CellCollection(b.getArrayOfCells(),b.getSizeOfArray());
-    GameLogics logic=GameLogics(b.getArrayOfCells(),b.getSizeOfArray());
-    cout<<"choose player1's name:"<<endl;
-    cin >>name;
+    CellCollection cellCollection = CellCollection(b.getArrayOfCells(), b.getSizeOfArray());
+    GameLogics logic = GameLogics(b.getArrayOfCells(), b.getSizeOfArray());
+    cout << "choose player1's name:" << endl;
+    cin >> name;
     //AI player1 = AI(b.getSizeOfArray(),b.getArrayOfCells(),'O',"yair");
-    Player player1 = Player(b.getArrayOfCells(),'O',name);
+    Player player1 = Player(b.getArrayOfCells(), 'O', name);
 
     Player *player2;
-    int choose=this->selection();
-    if(choose==1){
-        player2 = new AI(b.getSizeOfArray(),b.getArrayOfCells(),'X',"comp");
+    int choose = this->selection();
+    if (choose == 1) {
+        player2 = new AI(b.getSizeOfArray(), b.getArrayOfCells(), 'X', "comp");
     }
-    else{
-        cout<<"choose player2's name:"<<endl;
-        cin >>name2;
-        player2=new Player(b.getArrayOfCells(),'X',name2);
-
+    if (choose == 2) {
+        cout << "choose player2's name:" << endl;
+        cin >> name2;
+        player2 = new Player(b.getArrayOfCells(), 'X', name2);
+    }
+    if (choose == 3) {
+        cout << "choose player2's name:" << endl;
+        cin >> name2;
+        player2 = new ServerPlayer(b.getArrayOfCells(), 'X', name2);
     }
 
 
-
-    Winner checker=Winner(&player1,player2,b.getArrayOfCells(),b.getSizeOfArray());
+    Winner checker = Winner(&player1, player2, b.getArrayOfCells(), b.getSizeOfArray());
     b.print();
 
+
+    if (choose == 1 || choose == 2) {
+
+
 //flag is which player is currently playing
-    int flag=1;
-    //if flag==2 it means that the ganme has ended
-    while(flag!=2){
-        if(flag==1) {
-            logic.NextMove(player1.getSymbol());
-            checker.GetCounter(logic.GetSizeOfOffers());
-            if (checker.checkWinner() == true) {
-                flag = 2;
+        int flag = 1;
+        //if flag==2 it means that the ganme has ended
+        while (flag != 2) {
+            if (flag == 1) {
+                logic.NextMove(player1.getSymbol());
+                checker.GetCounter(logic.GetSizeOfOffers());
+                if (checker.checkWinner() == true) {
+                    flag = 2;
+                } else {
+                    logic.PrintOffers();
+                    player1.makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
+                    logic.clean();
+                    flag = 0;
+                    cellCollection.RunChecks(player1.getSymbol(), player1.getX(), player1.getY());
+                }
             } else {
-                logic.PrintOffers();
-                player1.makeMove(logic.GetOffers(),logic.GetSizeOfOffers());
-                logic.clean();
-                flag = 0;
-                cellCollection.RunChecks(player1.getSymbol(),player1.getX(),player1.getY());
-            }
-        }
-        else{
-            logic.NextMove(player2->getSymbol());
+                logic.NextMove(player2->getSymbol());
 
-            checker.GetCounter(logic.GetSizeOfOffers());
-            if (checker.checkWinner() == true) {
-                flag = 2;
-            } else {
-                logic.PrintOffers();
-                player2->makeMove(logic.GetOffers(),logic.GetSizeOfOffers());
-                logic.clean();
-                flag = 1;
-                cellCollection.RunChecks(player2->getSymbol(),player2->getX(),player2->getY());
+                checker.GetCounter(logic.GetSizeOfOffers());
+                if (checker.checkWinner() == true) {
+                    flag = 2;
+                } else {
+                    logic.PrintOffers();
+                    player2->makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
+                    logic.clean();
+                    flag = 1;
+                    cellCollection.RunChecks(player2->getSymbol(), player2->getX(), player2->getY());
+                }
             }
+
+            b.print();
+
         }
 
-        b.print();
+        deleteAll(b, logic);
+        delete player2;
+    } else {
+       ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', name2);
+//flag is which player is currently playing
+        int flag = 1;
+//if flag==2 it means that the ganme has ended
+        while (flag != 2) {
+            if (flag == 1) {
+                logic.NextMove(player1.getSymbol());
+                checker.GetCounter(logic.GetSizeOfOffers());
+                if (checker.checkWinner() == true) {
+                    flag = 2;
+                } else {
+                    logic.PrintOffers();
+                    player1.makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
+                    logic.clean();
+                    flag = 0;
+                    cellCollection.RunChecks(player1.getSymbol(), player1.getX(), player1.getY());
+                    //sends the last move to the other player(through the server)
+                    splayer.sendToServer(player1.getX(),player1.getY());
+                }
+
+            }
+            else{
+                logic.NextMove(splayer.getSymbol());
+                checker.GetCounter(logic.GetSizeOfOffers());
+                if (checker.checkWinner() == true) {
+                    flag = 2;
+                } else {
+                    //reads the remote player's move
+                    splayer.readFromServer();
+                    cout<<"x played: ("<<splayer.getX()<<","<<splayer.getY()<<")"<<endl;
+                    logic.clean();
+                    flag = 1;
+                    //changes the board according to the player's move
+                    cellCollection.RunChecks(splayer.getSymbol(), splayer.getX(), splayer.getY());
+                }
+            }
+            b.print();
+
+        }
 
     }
-
-deleteAll(b,logic);
-    delete player2;
 }
