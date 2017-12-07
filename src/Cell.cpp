@@ -10,6 +10,7 @@
 #include <string.h>
 #include <cstdlib>
 
+
 using namespace std;
 
 
@@ -35,9 +36,9 @@ int Cell::getY(){
 }
 
 
-char* Cell::cellToString(){
-    char* ret;
-    ret="%d %d",this->x_,this->y_;
+string Cell::cellToString(){
+    string ret;
+    ret ="%d %d",this->x_,this->y_;
 
     return ret;
 }

@@ -16,7 +16,7 @@ public :
     char GetValue();
     int getX();
     int getY();
-    char* cellToString();
+    string cellToString();
     void StringToCell(string answer);
 private :
     int x_;
