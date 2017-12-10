@@ -109,7 +109,7 @@ void GameFlow::run() {
         int flag=splayer.firstReadFromServer();
         Winner checker = Winner(&player1, &splayer, b.getArrayOfCells(), b.getSizeOfArray());
 //flag is which player is currently playing
-//if flag==2 it means that the ganme has ended
+//if flag==2 it means that the game has ended
         while (flag != 2) {
             if (flag == 0) {
                 logic.NextMove(player1.getSymbol());
@@ -138,7 +138,7 @@ void GameFlow::run() {
                     splayer.readFromServer();
                     cout<<"x played: ("<<splayer.getX()<<","<<splayer.getY()<<")"<<endl;
                     logic.clean();
-                    flag = 1;
+                    flag = 0;
                     //changes the board according to the player's move
                     cellCollection.RunChecks(splayer.getSymbol(), splayer.getX(), splayer.getY());
                 }

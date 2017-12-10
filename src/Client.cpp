@@ -68,12 +68,13 @@ throw "Error writing arg1 to socket";
 }
 
 
-Cell* Client::readFromServer() {
+Cell Client::readFromServer() {
     int result;
     int n = read(clientSocket, &result, sizeof(result));
     if (n == -1) {
         throw "Error reading result from socket";
     }
+
 
     int result2;
     int n2 = read(clientSocket, &result2, sizeof(result2));
@@ -81,7 +82,8 @@ Cell* Client::readFromServer() {
         throw "Error reading result from socket";
     }
     Cell c=Cell(result,result2);
-    return &c;
+    cout<<result<<"   "<<result2<<endl;
+    return c;
 }
 
 
