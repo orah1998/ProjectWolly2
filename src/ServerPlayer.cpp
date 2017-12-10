@@ -84,6 +84,12 @@ Cell ServerPlayer::readFromServer() {
     indexY=c.getY();
 }
 
+void ServerPlayer::changeFacts(char symbol,string name) {
+    this->symbol=symbol;
+    this->name=name;
+
+}
+
 
 int ServerPlayer::firstReadFromServer(){
     return this->client.firstReadFromServer();

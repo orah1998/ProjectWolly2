@@ -105,14 +105,15 @@ void GameFlow::run() {
         deleteAll(b, logic);
         delete player2;
     } else {
-
-       ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi");
+        ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi");
         int flag=splayer.firstReadFromServer();
         if(flag==0){
             Player player1 = Player(b.getArrayOfCells(), 'O',"Oi");
+            ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi");
         }
-        else{
+        if(flag==1){
             Player player1 = Player(b.getArrayOfCells(), 'X',"Xi");
+            splayer.changeSymbol('O');
         }
 
 
@@ -145,7 +146,7 @@ void GameFlow::run() {
                 } else {
                     //reads the remote player's move
                     splayer.readFromServer();
-                    cout<<"x played: ("<<splayer.getX()<<","<<splayer.getY()<<")"<<endl;
+                    cout<<splayer.getSymbol()<<" played: ("<<splayer.getX()<<","<<splayer.getY()<<")"<<endl;
                     logic.clean();
                     flag = 0;
                     //changes the board according to the player's move

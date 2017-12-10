@@ -27,6 +27,7 @@ public :
     void sendToServer(int x,int y);
     Cell readFromServer();
     int firstReadFromServer();
+    void changeFacts(char symbol,string name);
 
 private:
     int indexX;
