@@ -111,7 +111,7 @@ void GameFlow::run() {
 //flag is which player is currently playing
 //if flag==2 it means that the ganme has ended
         while (flag != 2) {
-            if (flag == 1) {
+            if (flag == 0) {
                 logic.NextMove(player1.getSymbol());
                 checker.GetCounter(logic.GetSizeOfOffers());
                 if (checker.checkWinner() == true) {
@@ -120,7 +120,7 @@ void GameFlow::run() {
                     logic.PrintOffers();
                     player1.makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
                     logic.clean();
-                    flag = 0;
+                    flag = 1;
                     cellCollection.RunChecks(player1.getSymbol(), player1.getX(), player1.getY());
                     //sends the last move to the other player(through the server)
                     splayer.sendToServer(player1.getX(),player1.getY());
