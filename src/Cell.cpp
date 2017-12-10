@@ -57,9 +57,9 @@ void Cell::StringToCell(string answer){
     char* fnum=new char[index+1];
     char* snum=new char[answer.length()-index];
     copy(answer.begin(),answer.end()-index,fnum);
-    printf("%s",fnum);
+    cout<<fnum<<endl;
     copy(answer.end()-index,answer.end(),snum);
-    printf("%s",snum);
+    cout<<snum<<endl;
 
     this->x_=atoi(fnum);
     this->y_=atoi(snum);

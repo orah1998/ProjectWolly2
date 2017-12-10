@@ -52,9 +52,9 @@ void Client::connectToServer() {
 
 
 
-void Client::sendExercise(char* arg1) {
+void Client::sendExercise(int x,int y) {
 // Write the exercise arguments to the socket
-int n = write(clientSocket, &arg1, sizeof(arg1));
+int n = write(clientSocket, &x, sizeof(x));
 if (n == -1) {
 throw "Error writing arg1 to socket";
 }
@@ -64,13 +64,18 @@ throw "Error writing arg1 to socket";
 
 
 Cell* Client::readFromServer() {
-    string result;
+    int result;
     int n = read(clientSocket, &result, sizeof(result));
     if (n == -1) {
         throw "Error reading result from socket";
     }
-    Cell c=Cell(0,0);
-    c.StringToCell(result);
+
+    int result2;
+    int n2 = read(clientSocket, &result2, sizeof(result2));
+    if (n2 == -1) {
+        throw "Error reading result from socket";
+    }
+    Cell c=Cell(result,result2);
     return &c;
 }
 

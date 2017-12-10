@@ -73,8 +73,7 @@ void ServerPlayer::makeMove(int** offers,int size) {
 
 
 void ServerPlayer::sendToServer(int x,int y) {
-    Cell cell=Cell(x,y);
- client.sendExercise(cell.cellToString());
+ client.sendExercise(x,y);
 }
 
 Cell ServerPlayer::readFromServer() {
