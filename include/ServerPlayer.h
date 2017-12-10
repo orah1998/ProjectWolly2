@@ -26,6 +26,7 @@ public :
     int getY();
     void sendToServer(int x,int y);
     Cell readFromServer();
+    int firstReadFromServer();
 
 private:
     int indexX;

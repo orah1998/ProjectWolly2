@@ -106,9 +106,9 @@ void GameFlow::run() {
         delete player2;
     } else {
        ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi");
+        int flag=splayer.firstReadFromServer();
         Winner checker = Winner(&player1, &splayer, b.getArrayOfCells(), b.getSizeOfArray());
 //flag is which player is currently playing
-        int flag = 1;
 //if flag==2 it means that the ganme has ended
         while (flag != 2) {
             if (flag == 1) {

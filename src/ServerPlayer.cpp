@@ -83,3 +83,8 @@ Cell ServerPlayer::readFromServer() {
     indexX=c->getX();
     indexY=c->getY();
 }
+
+
+int ServerPlayer::firstReadFromServer(){
+    return this->client.firstReadFromServer();
+}

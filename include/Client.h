@@ -16,6 +16,7 @@ public:
     void connectToServer();
     void sendExercise(char* arg1);
     Cell* readFromServer();
+    int firstReadFromServer();
 private:
     const char* serverIP;
     int serverPort;

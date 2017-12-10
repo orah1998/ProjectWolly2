@@ -74,3 +74,9 @@ Cell* Client::readFromServer() {
     return &c;
 }
 
+
+int Client::readFromServer() {
+    int turn;
+    int n = read(clientSocket, &turn, sizeof(int));
+    return turn;
+}
