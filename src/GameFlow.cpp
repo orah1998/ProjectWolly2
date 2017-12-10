@@ -105,7 +105,7 @@ void GameFlow::run() {
         deleteAll(b, logic);
         delete player2;
     } else {
-       ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', name2);
+       ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi");
         Winner checker = Winner(&player1, &splayer, b.getArrayOfCells(), b.getSizeOfArray());
 //flag is which player is currently playing
         int flag = 1;
