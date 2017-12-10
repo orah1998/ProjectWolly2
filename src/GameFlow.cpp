@@ -135,6 +135,7 @@ void GameFlow::run() {
                     flag = 2;
                 } else {
                     //reads the remote player's move
+                    cout<<"reached"<<endl;
                     splayer.readFromServer();
                     cout<<"x played: ("<<splayer.getX()<<","<<splayer.getY()<<")"<<endl;
                     logic.clean();
