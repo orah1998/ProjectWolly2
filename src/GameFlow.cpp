@@ -113,7 +113,7 @@ void GameFlow::run() {
         }
         if(flag==1){
             Player player1 = Player(b.getArrayOfCells(), 'X',"Xi");
-            splayer.changeSymbol('O');
+            splayer.changeFacts('O',"Oi");
         }
 
 
