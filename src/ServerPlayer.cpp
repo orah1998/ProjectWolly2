@@ -22,6 +22,7 @@ ServerPlayer::ServerPlayer(Cell** cellArray ,char symbol,string nickname){
     cells=cellArray;
     this->name=nickname;
     this->symbol=symbol;
+    this->client.connectToServer();
 }
 
 string ServerPlayer::GetName(){

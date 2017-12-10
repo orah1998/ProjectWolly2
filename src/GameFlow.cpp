@@ -45,15 +45,10 @@ void GameFlow::run() {
     int x;
     cout << "Choose size : " << endl;
     cin >> x;
-    string name;
-    string name2;
     Board b(x);
     CellCollection cellCollection = CellCollection(b.getArrayOfCells(), b.getSizeOfArray());
     GameLogics logic = GameLogics(b.getArrayOfCells(), b.getSizeOfArray());
-    cout << "choose player1's name:" << endl;
-    cin >> name;
-    //AI player1 = AI(b.getSizeOfArray(),b.getArrayOfCells(),'O',"yair");
-    Player player1 = Player(b.getArrayOfCells(), 'O', name);
+    Player player1 = Player(b.getArrayOfCells(), 'O',"Oi");
 
     Player *player2;
     int choose = this->selection();
@@ -61,14 +56,7 @@ void GameFlow::run() {
         player2 = new AI(b.getSizeOfArray(), b.getArrayOfCells(), 'X', "comp");
     }
     if (choose == 2) {
-        cout << "choose player2's name:" << endl;
-        cin >> name2;
-        player2 = new Player(b.getArrayOfCells(), 'X', name2);
-    }
-    if (choose == 3) {
-        cout << "choose player2's name:" << endl;
-        cin >> name2;
-        player2 = new ServerPlayer(b.getArrayOfCells(), 'X', name2);
+        player2 = new Player(b.getArrayOfCells(), 'X', "Xi");
     }
 
 
@@ -118,6 +106,7 @@ void GameFlow::run() {
         delete player2;
     } else {
        ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', name2);
+        Winner checker = Winner(&player1, &splayer, b.getArrayOfCells(), b.getSizeOfArray());
 //flag is which player is currently playing
         int flag = 1;
 //if flag==2 it means that the ganme has ended
@@ -139,6 +128,7 @@ void GameFlow::run() {
 
             }
             else{
+
                 logic.NextMove(splayer.getSymbol());
                 checker.GetCounter(logic.GetSizeOfOffers());
                 if (checker.checkWinner() == true) {

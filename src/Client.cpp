@@ -2,8 +2,6 @@
 // Created by or on 07/12/17.
 //
 
-#include <bits/socket_type.h>
-#include <bits/socket.h>
 #include <sys/socket.h>
 #include "../include/Client.h"
 #include "../include/Client.h"

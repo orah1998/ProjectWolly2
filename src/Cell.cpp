@@ -43,12 +43,26 @@ char* Cell::cellToString(){
 }
 
 void Cell::StringToCell(string answer){
-    int index;
-    for (int i = 0; i <answer.length(); ++i) {
-    if(answer[i]==' '){
-        index=i;
+
+    int index=0;
+    for (int i = 0; i < answer.length(); i++) {
+        if(answer[i]==' '){
+            index=i;
+            break;
+        }
     }
-    }
-    this->x_=atoi(answer.substr(0, index));
-    this->y_=atoi(answer.substr(++index, answer.length() - (index-1)));
+
+
+
+    char* fnum=new char[index+1];
+    char* snum=new char[answer.length()-index];
+    copy(answer.begin(),answer.end()-index,fnum);
+    printf("%s",fnum);
+    copy(answer.end()-index,answer.end(),snum);
+    printf("%s",snum);
+
+    this->x_=atoi(fnum);
+    this->y_=atoi(snum);
+    delete(fnum);
+    delete(snum);
 }
