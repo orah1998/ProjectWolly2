@@ -105,8 +105,17 @@ void GameFlow::run() {
         deleteAll(b, logic);
         delete player2;
     } else {
+
        ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi");
         int flag=splayer.firstReadFromServer();
+        if(flag==0){
+            Player player1 = Player(b.getArrayOfCells(), 'O',"Oi");
+        }
+        else{
+            Player player1 = Player(b.getArrayOfCells(), 'X',"Xi");
+        }
+
+
         Winner checker = Winner(&player1, &splayer, b.getArrayOfCells(), b.getSizeOfArray());
 //flag is which player is currently playing
 //if flag==2 it means that the game has ended
@@ -135,7 +144,6 @@ void GameFlow::run() {
                     flag = 2;
                 } else {
                     //reads the remote player's move
-                    cout<<"reached"<<endl;
                     splayer.readFromServer();
                     cout<<"x played: ("<<splayer.getX()<<","<<splayer.getY()<<")"<<endl;
                     logic.clean();
