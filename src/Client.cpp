@@ -59,6 +59,11 @@ if (n == -1) {
 throw "Error writing arg1 to socket";
 }
 
+    int n2 = write(clientSocket, &y, sizeof(y));
+    if (n2 == -1) {
+        throw "Error writing arg1 to socket";
+    }
+
 // Read the result from the server
 }
 
