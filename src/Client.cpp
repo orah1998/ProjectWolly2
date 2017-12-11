@@ -31,7 +31,8 @@ std::ifstream file("definitions.txt");
     std::getline(file,serverIPp);
     std::getline(file,serverPort2);
     char* serverIP= (char*)&serverIPp;
-    int serverPort=atoi(serverPort2);
+    char* serverPortChar=(char*)&serverPort2;
+    int serverPort=atoi(serverPortChar);
 
     Client (serverIP, serverPort);
 }
