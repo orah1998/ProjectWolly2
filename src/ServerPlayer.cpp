@@ -23,7 +23,7 @@ ServerPlayer::ServerPlayer(Cell** cellArray ,char symbol,string nickname,Client 
     this->name=nickname;
     this->symbol=symbol;
     this->client=client;
-    client.connectToServer();
+    this->client.connectToServer();
 
 }
 
