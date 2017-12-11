@@ -18,7 +18,7 @@ class ServerPlayer : public Player{
 public :
     ServerPlayer();
     void makeMove(int** offers,int size);
-    ServerPlayer(Cell** cellArray,char symbol,string nickname);
+    ServerPlayer(Cell** cellArray,char symbol,string nickname,Client client);
     char getSymbol();
     bool IsFound(int** offers,int x,int y);
     string GetName();
@@ -37,7 +37,7 @@ private:
     Cell** cells;
 protected:
     char symbol;
-    Client client=Client();
+    Client *client;
 
 };
 #endif //UNTITLED_SERVERPLAYER_H

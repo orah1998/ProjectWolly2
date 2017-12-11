@@ -12,7 +12,6 @@ class
 Client
 {
 public:
-    Client();
     Client(const char* serverIP, int serverPort);
     void connectToServer();
     void sendExercise(int x,int y);

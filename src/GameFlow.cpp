@@ -3,6 +3,7 @@
 //208250746
 
 #include <iostream>
+#include <fstream>
 #include "../include/Board.h"
 #include "malloc.h"
 #include "../include/Player.h"
@@ -107,7 +108,17 @@ void GameFlow::run() {
         deleteAll(b, logic);
         delete player2;
     } else {
-        ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi");
+
+        //defining a new client
+        std::ifstream file("definitions");
+        string ip;
+        int port;
+        file >> ip;
+        file >> port;
+        Client client=Client(ip.c_str(),port);
+
+
+        ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi",client);
         int flag=splayer.firstReadFromServer();
         if(flag==0){
             player1 =new Player(b.getArrayOfCells(), 'O',"Oi");
