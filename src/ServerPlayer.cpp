@@ -79,9 +79,7 @@ void ServerPlayer::sendToServer(int x,int y) {
 }
 
 Cell ServerPlayer::readFromServer() {
-    cout<<"h"<<endl;
     Cell c=client.readFromServer();
-    cout<<"h"<<endl;
     cout<<c.getY()<<"  "<<c.getX()<<endl;
     this->cells[c.getX()][c.getY()].ChangeValue(symbol);
     indexX=c.getX();
