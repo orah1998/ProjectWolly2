@@ -110,8 +110,6 @@ Cell Client::readFromServer() {
 
 int Client::firstReadFromServer() {
     int turn;
-    cout<<this->serverIP<<" "<<this->serverPort<<endl;
     int n = read(clientSocket, &turn, sizeof(int));
-    cout<<turn<<endl;
     return turn;
 }
