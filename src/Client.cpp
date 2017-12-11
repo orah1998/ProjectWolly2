@@ -21,20 +21,12 @@ using namespace std;
 
 
 Client::Client(){
-
-
-std::ifstream file("definitions.txt");
-    string serverIPp;
-    string serverPort2;
-
-
-    std::getline(file,serverIPp);
-    std::getline(file,serverPort2);
-    char* serverIP= (char*)&serverIPp;
-    char* serverPortChar=(char*)&serverPort2;
-    int serverPort=atoi(serverPortChar);
-
-    Client (serverIP, serverPort);
+std::ifstream file("definitions");
+    string ip;
+    int port;
+    file >> ip;
+    file >> port;
+    Client(ip.c_str(), port);
 }
 
 
