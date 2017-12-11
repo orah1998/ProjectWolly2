@@ -127,6 +127,7 @@ void GameFlow::run() {
                 checker.GetCounter(logic.GetSizeOfOffers());
                 if (checker.checkWinner() == true) {
                     flag = 2;
+                    splayer.sendToServer(-1,-1);
                 } else {
                     logic.PrintOffers();
                     player1->makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
@@ -144,6 +145,7 @@ void GameFlow::run() {
                 checker.GetCounter(logic.GetSizeOfOffers());
                 if (checker.checkWinner() == true) {
                     flag = 2;
+                    splayer.sendToServer(-1,-1);
                 } else {
                     //reads the remote player's move
                     splayer.readFromServer();
