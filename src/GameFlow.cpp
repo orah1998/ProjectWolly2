@@ -54,12 +54,13 @@ void GameFlow::run() {
     Player *player2;
     int choose = this->selection();
     if (choose == 1) {
-        Player(b.getArrayOfCells(), 'O',"Oi");
-        player2 = new AI(b.getSizeOfArray(), b.getArrayOfCells(), 'X', "comp");
+        player1=new Player(b.getArrayOfCells(), 'O',"Oi");
+        player2 = new Player(b.getArrayOfCells(), 'X', "Xi");
+
     }
     if (choose == 2) {
-        Player(b.getArrayOfCells(), 'O',"Oi");
-        player2 = new Player(b.getArrayOfCells(), 'X', "Xi");
+        player1=new Player(b.getArrayOfCells(), 'O',"Oi");
+        player2 = new AI(b.getSizeOfArray(), b.getArrayOfCells(), 'X', "comp");
     }
 
 
