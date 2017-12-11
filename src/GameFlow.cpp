@@ -48,19 +48,21 @@ void GameFlow::run() {
     Board b(x);
     CellCollection cellCollection = CellCollection(b.getArrayOfCells(), b.getSizeOfArray());
     GameLogics logic = GameLogics(b.getArrayOfCells(), b.getSizeOfArray());
-    Player player1 = Player(b.getArrayOfCells(), 'O',"Oi");
+    Player *player1;
 
     Player *player2;
     int choose = this->selection();
     if (choose == 1) {
+        Player(b.getArrayOfCells(), 'O',"Oi");
         player2 = new AI(b.getSizeOfArray(), b.getArrayOfCells(), 'X', "comp");
     }
     if (choose == 2) {
+        Player(b.getArrayOfCells(), 'O',"Oi");
         player2 = new Player(b.getArrayOfCells(), 'X', "Xi");
     }
 
 
-    Winner checker = Winner(&player1, player2, b.getArrayOfCells(), b.getSizeOfArray());
+    Winner checker = Winner(player1, player2, b.getArrayOfCells(), b.getSizeOfArray());
     b.print();
 
 
@@ -72,16 +74,16 @@ void GameFlow::run() {
         //if flag==2 it means that the ganme has ended
         while (flag != 2) {
             if (flag == 1) {
-                logic.NextMove(player1.getSymbol());
+                logic.NextMove(player1->getSymbol());
                 checker.GetCounter(logic.GetSizeOfOffers());
                 if (checker.checkWinner() == true) {
                     flag = 2;
                 } else {
                     logic.PrintOffers();
-                    player1.makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
+                    player1->makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
                     logic.clean();
                     flag = 0;
-                    cellCollection.RunChecks(player1.getSymbol(), player1.getX(), player1.getY());
+                    cellCollection.RunChecks(player1->getSymbol(), player1->getX(), player1->getY());
                 }
             } else {
                 logic.NextMove(player2->getSymbol());
@@ -108,32 +110,31 @@ void GameFlow::run() {
         ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi");
         int flag=splayer.firstReadFromServer();
         if(flag==0){
-            Player player1 = Player(b.getArrayOfCells(), 'O',"Oi");
-            ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi");
+            player1 =new Player(b.getArrayOfCells(), 'O',"Oi");
         }
         if(flag==1){
-            Player player1 = Player(b.getArrayOfCells(), 'X',"Xi");
+            player1 =new Player(b.getArrayOfCells(), 'X',"Xi");
             splayer.changeFacts('O',"Oi");
         }
 
 
-        Winner checker = Winner(&player1, &splayer, b.getArrayOfCells(), b.getSizeOfArray());
+        Winner checker = Winner(player1, &splayer, b.getArrayOfCells(), b.getSizeOfArray());
 //flag is which player is currently playing
 //if flag==2 it means that the game has ended
         while (flag != 2) {
             if (flag == 0) {
-                logic.NextMove(player1.getSymbol());
+                logic.NextMove(player1->getSymbol());
                 checker.GetCounter(logic.GetSizeOfOffers());
                 if (checker.checkWinner() == true) {
                     flag = 2;
                 } else {
                     logic.PrintOffers();
-                    player1.makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
+                    player1->makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
                     logic.clean();
                     flag = 1;
-                    cellCollection.RunChecks(player1.getSymbol(), player1.getX(), player1.getY());
+                    cellCollection.RunChecks(player1->getSymbol(), player1->getX(), player1->getY());
                     //sends the last move to the other player(through the server)
-                    splayer.sendToServer(player1.getX(),player1.getY());
+                    splayer.sendToServer(player1->getX(),player1->getY());
                 }
 
             }
