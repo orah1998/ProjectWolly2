@@ -110,7 +110,7 @@ void GameFlow::run() {
     } else {
 
         //defining a new client
-        std::ifstream file("definitions");
+        std::ifstream file("client_definitions");
         string ip;
         int port;
         file >> ip;
