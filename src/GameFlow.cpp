@@ -115,11 +115,12 @@ void GameFlow::run() {
         int port;
         file >> ip;
         file >> port;
-        Client client=Client(ip.c_str(),port);
-
-
+        const char* ip2=ip.c_str();
+        Client client=Client(ip2,port);
         ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi",client);
+
         int flag=splayer.firstReadFromServer();
+        cout<<flag<<endl;
         if(flag==0){
             player1 =new Player(b.getArrayOfCells(), 'O',"Oi");
         }
@@ -141,12 +142,18 @@ void GameFlow::run() {
                     splayer.sendToServer(-1,-1);
                 } else {
                     logic.PrintOffers();
-                    player1->makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
-                    logic.clean();
-                    flag = 1;
-                    cellCollection.RunChecks(player1->getSymbol(), player1->getX(), player1->getY());
-                    //sends the last move to the other player(through the server)
-                    splayer.sendToServer(player1->getX(),player1->getY());
+                    if (logic.GetSizeOfOffers() != 0) {
+                        player1->makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
+                        logic.clean();
+                        flag = 1;
+                        cellCollection.RunChecks(player1->getSymbol(), player1->getX(), player1->getY());
+                        //sends the last move to the other player(through the server)
+                        splayer.sendToServer(player1->getX(), player1->getY());
+                    }else{
+                        //tells the server that this player has no available moves!
+                        splayer.sendToServer(-2, -2);
+                        flag=1;
+                    }
                 }
 
             }
@@ -160,11 +167,16 @@ void GameFlow::run() {
                 } else {
                     //reads the remote player's move
                     splayer.readFromServer();
+                    if(splayer.getX()==-2&& splayer.getY()==-2){
+                        cout<<splayer.getSymbol()<<" played no moves!"<<endl;
+                        flag=0;
+                    }else{
                     cout<<splayer.getSymbol()<<" played: ("<<splayer.getX()<<","<<splayer.getY()<<")"<<endl;
                     logic.clean();
                     flag = 0;
                     //changes the board according to the player's move
                     cellCollection.RunChecks(splayer.getSymbol(), splayer.getX(), splayer.getY());
+                    }
                 }
             }
             b.print();
