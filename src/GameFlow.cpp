@@ -118,12 +118,7 @@ void GameFlow::run() {
         const char* ip2=ip.c_str();
         Client client=Client(ip2,port);
         ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi",client);
-        cout<<"here is flag"<<endl;
         int flag=splayer.firstReadFromServer();
-        cout<<"here is flag"<<endl;
-        cout<<flag<<endl;
-
-        cout<<flag<<endl;
         if(flag==0){
             player1 =new Player(b.getArrayOfCells(), 'O',"Oi");
         }
