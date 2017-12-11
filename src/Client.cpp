@@ -13,7 +13,30 @@
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <fstream>
+#include <cstdlib>
+
 using namespace std;
+
+
+
+Client::Client(){
+
+
+std::ifstream file("definitions.txt");
+    string serverIPp;
+    string serverPort2;
+
+
+    std::getline(file,serverIPp);
+    std::getline(file,serverPort2);
+    char* serverIP= (char*)&serverIPp;
+    int serverPort=atoi(serverPort2);
+
+    Client (serverIP, serverPort);
+}
+
+
 Client::Client(const char* serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
     cout << "Client"<< endl;
