@@ -10,7 +10,6 @@
 #include <string.h>
 #include <cstdlib>
 
-
 using namespace std;
 
 
@@ -36,20 +35,34 @@ int Cell::getY(){
 }
 
 
-char *  Cell::cellToString(){
-    char *  ret;
-    ret ="%d %d",this->x_,this->y_;
+char* Cell::cellToString(){
+    char* ret;
+    ret="%d %d",this->x_,this->y_;
 
     return ret;
 }
 
-void Cell::StringToCell(char * answer) {
-    int index;
-    for (int i = 0; i < answer.length(); ++i) {
-        if (answer[i] == ' ') {
-            index = i;
+void Cell::StringToCell(string answer){
+
+    int index=0;
+    for (int i = 0; i < answer.length(); i++) {
+        if(answer[i]==' '){
+            index=i;
+            break;
         }
     }
-    this->x_ = atoi(answer.substr(0, index));
-    this->y_ = atoi(answer.substr(++index, answer.length() - (index - 1)));
+
+
+
+    char* fnum=new char[index+1];
+    char* snum=new char[answer.length()-index];
+    copy(answer.begin(),answer.end()-index,fnum);
+    cout<<fnum<<endl;
+    copy(answer.end()-index,answer.end(),snum);
+    cout<<snum<<endl;
+
+    this->x_=atoi(fnum);
+    this->y_=atoi(snum);
+    delete(fnum);
+    delete(snum);
 }

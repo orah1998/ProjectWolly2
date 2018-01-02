@@ -18,10 +18,13 @@ ServerPlayer::ServerPlayer(){
 
 }
 
-ServerPlayer::ServerPlayer(Cell** cellArray ,char symbol,string nickname){
+ServerPlayer::ServerPlayer(Cell** cellArray ,char symbol,string nickname,Client client){
     cells=cellArray;
     this->name=nickname;
     this->symbol=symbol;
+    this->client=client;
+    this->client.connectToServer();
+
 }
 
 string ServerPlayer::GetName(){
@@ -72,13 +75,24 @@ void ServerPlayer::makeMove(int** offers,int size) {
 
 
 void ServerPlayer::sendToServer(int x,int y) {
-    Cell cell=Cell(x,y);
- client.sendExercise(cell.cellToString());
+ client.sendExercise(x,y);
 }
 
 Cell ServerPlayer::readFromServer() {
-    Cell* c=client.readFromServer();
-    this->cells[c->getX()][c->getY()].ChangeValue(symbol);
-    indexX=c->getX();
-    indexY=c->getY();
+    Cell c=client.readFromServer();
+    cout<<c.getY()<<"  "<<c.getX()<<endl;
+    this->cells[c.getX()][c.getY()].ChangeValue(symbol);
+    indexX=c.getX();
+    indexY=c.getY();
+}
+
+void ServerPlayer::changeFacts(char symbol,string name) {
+    this->symbol=symbol;
+    this->name=name;
+
+}
+
+
+int ServerPlayer::firstReadFromServer(){
+    return this->client.firstReadFromServer();
 }

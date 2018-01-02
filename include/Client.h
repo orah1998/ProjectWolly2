@@ -12,10 +12,12 @@ class
 Client
 {
 public:
+    Client();
     Client(const char* serverIP, int serverPort);
     void connectToServer();
-    void sendExercise(char* arg1);
-    Cell* readFromServer();
+    void sendExercise(int x,int y);
+    Cell readFromServer();
+    int firstReadFromServer();
 private:
     const char* serverIP;
     int serverPort;

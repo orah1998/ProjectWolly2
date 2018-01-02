@@ -2,8 +2,6 @@
 // Created by or on 07/12/17.
 //
 
-#include <bits/socket_type.h>
-#include <bits/socket.h>
 #include <sys/socket.h>
 #include "../include/Client.h"
 #include "../include/Client.h"
@@ -15,7 +13,25 @@
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <fstream>
+#include <cstdlib>
+
 using namespace std;
+
+
+Client::Client(){
+    //defining a new client
+    std::ifstream file("definitions");
+    string ip;
+    int port;
+    file >> ip;
+    file >> port;
+    const char* ip2=ip.c_str();
+    this->serverPort=port;
+    this->serverIP=ip2;
+    this->clientSocket=0;
+}
+
 Client::Client(const char* serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
     cout << "Client"<< endl;
@@ -26,16 +42,19 @@ void Client::connectToServer() {
     if (clientSocket== -1) {
         throw "Error opening socket";
     }
+
 // Convert the ip string to a network address
     struct in_addr address;
     if (!inet_aton(serverIP, &address)) {
         throw "Can't parse IP address";
     }
+
     struct hostent *server;
     server = gethostbyaddr((const void *)&address, sizeof address, AF_INET);
     if (server == NULL) {
         throw "Host is unreachable";
     }
+
 // Create a structure for the server address
     struct sockaddr_in serverAddress;
     bzero((char *)&address, sizeof(address));
@@ -54,25 +73,43 @@ void Client::connectToServer() {
 
 
 
-void Client::sendExercise(char* arg1) {
+void Client::sendExercise(int x,int y) {
 // Write the exercise arguments to the socket
-int n = write(clientSocket, &arg1, sizeof(arg1));
+int n = write(clientSocket, &x, sizeof(x));
 if (n == -1) {
 throw "Error writing arg1 to socket";
 }
+
+    int n2 = write(clientSocket, &y, sizeof(y));
+    if (n2 == -1) {
+        throw "Error writing arg1 to socket";
+    }
 
 // Read the result from the server
 }
 
 
-Cell* Client::readFromServer() {
-    string result;
+Cell Client::readFromServer() {
+    int result;
     int n = read(clientSocket, &result, sizeof(result));
     if (n == -1) {
         throw "Error reading result from socket";
     }
-    Cell c=Cell(0,0);
-    c.StringToCell(result);
-    return &c;
+
+
+    int result2;
+    int n2 = read(clientSocket, &result2, sizeof(result2));
+    if (n2 == -1) {
+        throw "Error reading result from socket";
+    }
+    Cell c=Cell(result,result2);
+    cout<<result<<"   "<<result2<<endl;
+    return c;
 }
 
+
+int Client::firstReadFromServer() {
+    int turn;
+    int n = read(clientSocket, &turn, sizeof(int));
+    return turn;
+}

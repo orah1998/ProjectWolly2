@@ -18,7 +18,7 @@ class ServerPlayer : public Player{
 public :
     ServerPlayer();
     void makeMove(int** offers,int size);
-    ServerPlayer(Cell** cellArray,char symbol,string nickname);
+    ServerPlayer(Cell** cellArray,char symbol,string nickname,Client client);
     char getSymbol();
     bool IsFound(int** offers,int x,int y);
     string GetName();
@@ -26,6 +26,8 @@ public :
     int getY();
     void sendToServer(int x,int y);
     Cell readFromServer();
+    int firstReadFromServer();
+    void changeFacts(char symbol,string name);
 
 private:
     int indexX;
@@ -35,7 +37,7 @@ private:
     Cell** cells;
 protected:
     char symbol;
-    Client client=Client("127.0.0.1",8592);
+    Client client=Client("0",0);
 
 };
 #endif //UNTITLED_SERVERPLAYER_H
