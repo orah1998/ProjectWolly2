@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <fstream>
 #include <cstdlib>
+#include <sstream>
 
 using namespace std;
 
@@ -90,20 +91,33 @@ throw "Error writing arg1 to socket";
 
 
 Cell Client::readFromServer() {
-    int result;
+    string result;
     int n = read(clientSocket, &result, sizeof(result));
     if (n == -1) {
         throw "Error reading result from socket";
     }
 
+    stringstream str(result);
+    string command;
+    str>> command;
 
-    int result2;
-    int n2 = read(clientSocket, &result2, sizeof(result2));
-    if (n2 == -1) {
-        throw "Error reading result from socket";
-    }
-    Cell c=Cell(result,result2);
-    cout<<result<<"   "<<result2<<endl;
+    string x;
+    str >> x;
+
+    string y;
+    str >> y;
+
+
+
+    stringstream str2(x);
+    stringstream str3(y);
+    int indexX=0;
+    int indexY=0;
+    str2>>indexX;
+    str3>>indexY;
+
+    Cell c=Cell(indexX,indexY);
+
     return c;
 }
 
