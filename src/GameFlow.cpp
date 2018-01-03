@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstring>
 #include "../include/Board.h"
 #include "malloc.h"
 #include "../include/Player.h"
@@ -14,6 +15,7 @@
 #include "../include/AI.h"
 #include "../include/ServerPlayer.h"
 
+#define SIZEOF 2000
 
 GameFlow::GameFlow(){
 
@@ -43,9 +45,8 @@ void GameFlow::deleteAll(Board b,GameLogics logic) {
 }
 
 void GameFlow::run() {
-    int x;
-    cout << "Choose size : " << endl;
-    cin >> x;
+    int x=8;
+    cout << "Welcome to Reversi!!!!!! " << endl;
     Board b(x);
     CellCollection cellCollection = CellCollection(b.getArrayOfCells(), b.getSizeOfArray());
     GameLogics logic = GameLogics(b.getArrayOfCells(), b.getSizeOfArray());
@@ -122,6 +123,9 @@ void GameFlow::run() {
         ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi",client);
         int flag=splayer.firstReadFromServer();
         if(flag==0){
+        splayer.startGame();
+        }
+        if(flag==0){
             player1 =new Player(b.getArrayOfCells(), 'O',"Oi");
         }
         if(flag==1){
@@ -139,19 +143,22 @@ void GameFlow::run() {
                 checker.GetCounter(logic.GetSizeOfOffers());
                 if (checker.checkWinner() == true) {
                     flag = 2;
-                    splayer.sendToServer(-1,-1);
+                    splayer.sendToServer("-1");
                 } else {
                     logic.PrintOffers();
                     if (logic.GetSizeOfOffers() != 0) {
-                        player1->makeMove(logic.GetOffers(), logic.GetSizeOfOffers());
+                        char move[SIZEOF];
+
+                        strcpy(move,player1->makeMove(logic.GetOffers(), logic.GetSizeOfOffers()));
+
                         logic.clean();
                         flag = 1;
                         cellCollection.RunChecks(player1->getSymbol(), player1->getX(), player1->getY());
                         //sends the last move to the other player(through the server)
-                        splayer.sendToServer(player1->getX(), player1->getY());
+                        splayer.sendToServer(move);
                     }else{
                         //tells the server that this player has no available moves!
-                        splayer.sendToServer(-2, -2);
+                        splayer.sendToServer("-1");
                         flag=1;
                     }
                 }
@@ -163,7 +170,7 @@ void GameFlow::run() {
                 checker.GetCounter(logic.GetSizeOfOffers());
                 if (checker.checkWinner() == true) {
                     flag = 2;
-                    splayer.sendToServer(-1,-1);
+                    splayer.sendToServer("-1");
                 } else {
                     //reads the remote player's move
                     splayer.readFromServer();

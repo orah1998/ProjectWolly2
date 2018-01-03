@@ -16,7 +16,8 @@
 #include <fstream>
 #include <cstdlib>
 #include <sstream>
-
+#include <cstring>
+#define SIZEOF 2000
 using namespace std;
 
 
@@ -35,10 +36,6 @@ Client::Client(){
 
 Client::Client(const char* serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
-    cout<<"123"<<endl;
-    cout<<serverIP<<endl;
-    cout<<serverPort<<endl;
-    cout << "Client"<< endl;
 }
 void Client::connectToServer() {
 // Create a socket point
@@ -75,36 +72,33 @@ void Client::connectToServer() {
     cout << "Connected to server" << endl;
 }
 
-
-
-
-
-void Client::sendExercise(int x,int y) {
+void Client::sendExercise(char move[]) {
 // Write the exercise arguments to the socket
-int n = write(clientSocket, &x, sizeof(x));
-if (n == -1) {
-throw "Error writing arg1 to socket";
-}
-
-    int n2 = write(clientSocket, &y, sizeof(y));
-    if (n2 == -1) {
+    cout<<"sending"<<endl;
+    cout<<move<<endl;
+    int n = write(clientSocket, move, SIZEOF);
+    if (n == -1) {
         throw "Error writing arg1 to socket";
     }
+}
 
-// Read the result from the server
+
+int Client::startGame(){
+    int start;
+    int n = read(clientSocket, &start, sizeof(int));
+    return start;
 }
 
 
 Cell Client::readFromServer() {
-    string result;
-    int n = read(clientSocket, &result, sizeof(result));
+    char result[SIZEOF];
+    int n = read(clientSocket, result, SIZEOF);
     if (n == -1) {
         throw "Error reading result from socket";
     }
+    cout << " the point is : " << result << endl;
 
     stringstream str(result);
-    string command;
-    str>> command;
 
     string x;
     str >> x;
@@ -112,16 +106,14 @@ Cell Client::readFromServer() {
     string y;
     str >> y;
 
-
-
     stringstream str2(x);
     stringstream str3(y);
-    int indexX=0;
-    int indexY=0;
-    str2>>indexX;
-    str3>>indexY;
+    int indexX = 0;
+    int indexY = 0;
+    str2 >> indexX;
+    str3 >> indexY;
 
-    Cell c=Cell(indexX,indexY);
+    Cell c = Cell(indexX, indexY);
 
     return c;
 }
@@ -129,49 +121,69 @@ Cell Client::readFromServer() {
 
 int Client::firstReadFromServer() {
 
-
-    string result;
-    string command;
-    getline(cin,command);
+    cout << "choose command" << endl;
+    char result[SIZEOF];
+    char command[SIZEOF];
+    char y[SIZEOF];
     stringstream str(command);
+//x is the command
+    char x[SIZEOF];
+    cin >> x;
+    strcat(command, x);
+if(strcmp(x,"list_games")!=0) {
+    //y is the name (etc)
+    cin >> y;
+    strcat(command, " ");
+    strcat(command, y);
+}else{
+    strcat(command, " ");
+    strcat(command,"2");
+}
+    do {
+        if (strcmp(x, "join") == 0) {
+            long n = write(clientSocket, &command, SIZEOF);
+            cout << "you chose join" << endl;
+            return 1;
 
-    string x;
-    str >> x;
+        }
 
-    string y;
-    str >> y;
-
-    while(x.compare("list")){
-    if(x.compare("join")){
-        int n = write(clientSocket, &command, sizeof(string));
-        return 1;
-
-    }
-
-    if(x.compare("start")){
-        int n = write(clientSocket, &command, sizeof(string));
-        return 0;
-    }
+        if (strcmp(x, "start") == 0) {
+            long n = write(clientSocket, &command, SIZEOF);
+            cout << "you chose start" << endl;
+            return 0;
+        }
 
 
+        if (strcmp(x, "list_games") == 0) {
+            int n = write(clientSocket, &command, sizeof(command));
+            n = read(clientSocket, result, sizeof(command));
+            cout << result << endl;
+        }
 
-    if(x.compare("list")){
-        int n = write(clientSocket, &command, sizeof(string));
-         n = read(clientSocket, &result, sizeof(string));
-        cout<<result<<endl;
-    }
+        cout << "choose your command" << endl;
+        string result;
+        char command[SIZEOF];
 
-        
-        getline(cin,command);
         stringstream str(command);
-        str >> x;
-        str >> y;
-    }
+//x is the command
+        char xi[SIZEOF];
+        cin >> xi;
+        strcpy(x,xi);
+        strcpy(command, x);
+        if(strcmp(x,"list_games")!=0) {
+            //y is the name (etc)
+            char yi[SIZEOF];
+            cin >> yi;
+            strcpy(y, yi);
+            strcat(command, " ");
+            strcat(command, y);
+        }else{
+            strcat(command, " ");
+            strcat(command,"2");
+        }
 
 
-
-    int n = read(clientSocket, &command, sizeof(string));
-    return turn;
+    } while (true);
 }
 
 

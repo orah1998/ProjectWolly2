@@ -14,7 +14,7 @@ this->board=board;
 };
 
 
- void AI::makeMove(int **offers,int size) {
+ char* AI::makeMove(int **offers,int size) {
     int sizeOfOffers=size;
 
      int minScore=sizeOfBoard*sizeOfBoard;
@@ -28,7 +28,7 @@ this->board=board;
 
 board[lastPlayedX][lastPlayedY].ChangeValue(this->symbol);
 
-
+     return "s";
 }
 
 //checking the score on a play from offers.

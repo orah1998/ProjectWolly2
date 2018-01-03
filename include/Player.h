@@ -14,7 +14,7 @@ using namespace std;
 class Player {
 public :
     Player();
-    virtual void makeMove(int** offers,int size);
+    virtual char* makeMove(int** offers,int size);
     Player(Cell** cellArray,char symbol,string nickname);
     virtual char getSymbol();
     bool IsFound(int** offers,int x,int y);

@@ -15,7 +15,8 @@ public:
     Client();
     Client(const char* serverIP, int serverPort);
     void connectToServer();
-    void sendExercise(int x,int y);
+    void sendExercise(char move[]);
+    int startGame();
     Cell readFromServer();
     int firstReadFromServer();
 private:

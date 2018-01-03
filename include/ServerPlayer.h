@@ -17,14 +17,15 @@ using namespace std;
 class ServerPlayer : public Player{
 public :
     ServerPlayer();
-    void makeMove(int** offers,int size);
+    char* makeMove(int** offers,int size);
     ServerPlayer(Cell** cellArray,char symbol,string nickname,Client client);
     char getSymbol();
     bool IsFound(int** offers,int x,int y);
     string GetName();
     int getX();
     int getY();
-    void sendToServer(int x,int y);
+    int startGame();
+        void sendToServer(char move[]);
     Cell readFromServer();
     int firstReadFromServer();
     void changeFacts(char symbol,string name);

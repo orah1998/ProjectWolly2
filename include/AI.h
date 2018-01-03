@@ -18,7 +18,7 @@ public:
 AI(int sizeOfBoard, Cell** board,char symbol,string name);
     Cell** copyBoard(Cell** board);
     int ScoreOfNextPlay(int x,int y);
-    void makeMove(int** offers,int size);
+    char* makeMove(int** offers,int size);
     int calculateScore(int x,int y, Cell** board);
     void deleteAll(Cell** board);
      int getX();
