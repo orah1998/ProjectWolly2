@@ -128,7 +128,53 @@ Cell Client::readFromServer() {
 
 
 int Client::firstReadFromServer() {
-    int turn;
-    int n = read(clientSocket, &turn, sizeof(int));
+
+
+    string result;
+    string command;
+    getline(cin,command);
+    stringstream str(command);
+
+    string x;
+    str >> x;
+
+    string y;
+    str >> y;
+
+    while(x.compare("list")){
+    if(x.compare("join")){
+        int n = write(clientSocket, &command, sizeof(string));
+        return 1;
+
+    }
+
+    if(x.compare("start")){
+        int n = write(clientSocket, &command, sizeof(string));
+        return 0;
+    }
+
+
+
+    if(x.compare("list")){
+        int n = write(clientSocket, &command, sizeof(string));
+         n = read(clientSocket, &result, sizeof(string));
+        cout<<result<<endl;
+    }
+
+        
+        getline(cin,command);
+        stringstream str(command);
+        str >> x;
+        str >> y;
+    }
+
+
+
+    int n = read(clientSocket, &command, sizeof(string));
     return turn;
 }
+
+
+
+
+
