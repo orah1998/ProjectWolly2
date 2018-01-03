@@ -142,6 +142,9 @@ if(strcmp(x,"list_games")!=0) {
     do {
         if (strcmp(x, "join") == 0) {
             long n = write(clientSocket, &command, SIZEOF);
+            if(n<=0){
+                throw "exit";
+            }
             cout << "you chose join" << endl;
             return 1;
 
@@ -149,6 +152,9 @@ if(strcmp(x,"list_games")!=0) {
 
         if (strcmp(x, "start") == 0) {
             long n = write(clientSocket, &command, SIZEOF);
+            if(n<=0){
+                throw "exit";
+            }
             cout << "you chose start" << endl;
             return 0;
         }
@@ -156,7 +162,13 @@ if(strcmp(x,"list_games")!=0) {
 
         if (strcmp(x, "list_games") == 0) {
             int n = write(clientSocket, &command, sizeof(command));
+            if(n<=0){
+                throw "exit";
+            }
             n = read(clientSocket, result, sizeof(command));
+            if(n<=0){
+                throw "exit";
+            }
             cout << result << endl;
         }
 

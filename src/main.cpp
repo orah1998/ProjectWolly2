@@ -16,9 +16,12 @@ using namespace std;
 
 
 int main(int argc,char* argv[]) {
+    try{
   GameFlow gameFlow=GameFlow();
     gameFlow.run();
-
+}catch(const char* message){
+        cout<<message<<endl;
+    }
 
    return 0;
 }
