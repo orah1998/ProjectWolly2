@@ -111,11 +111,12 @@ void GameFlow::run() {
     } else {
 
         //defining a new client
-        std::ifstream file("client_definitions");
+        std::ifstream file("../src/client_definitions");
         string ip;
         int port;
         file >> ip;
         file >> port;
+
         const char* ip2=ip.c_str();
         Client client=Client(ip2,port);
         ServerPlayer splayer =ServerPlayer(b.getArrayOfCells(), 'X', "Xi",client);

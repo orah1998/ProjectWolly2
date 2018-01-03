@@ -37,7 +37,7 @@ private:
     Cell** cells;
 protected:
     char symbol;
-    Client client=Client("0",0);
+    Client client=Client();
 
 };
 #endif //UNTITLED_SERVERPLAYER_H

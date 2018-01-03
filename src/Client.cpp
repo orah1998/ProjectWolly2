@@ -22,7 +22,7 @@ using namespace std;
 
 Client::Client(){
     //defining a new client
-    std::ifstream file("definitions");
+    std::ifstream file("../src/client_definitions");
     string ip;
     int port;
     file >> ip;
@@ -35,6 +35,9 @@ Client::Client(){
 
 Client::Client(const char* serverIP, int serverPort):
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
+    cout<<"123"<<endl;
+    cout<<serverIP<<endl;
+    cout<<serverPort<<endl;
     cout << "Client"<< endl;
 }
 void Client::connectToServer() {
@@ -56,6 +59,7 @@ void Client::connectToServer() {
         throw "Host is unreachable";
     }
 
+
 // Create a structure for the server address
     struct sockaddr_in serverAddress;
     bzero((char *)&address, sizeof(address));
@@ -64,6 +68,7 @@ void Client::connectToServer() {
 //htons converts values between host and network byte orders
     serverAddress.sin_port=htons(serverPort);
 //Establish a connection with the TCP server
+
     if (connect(clientSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) ==-1) {
         throw "Error connecting to server";
     }

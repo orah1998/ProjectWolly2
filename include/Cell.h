@@ -17,7 +17,7 @@ public :
     int getX();
     int getY();
     char *  cellToString();
-    void StringToCell(char *  answer);
+    void StringToCell(string  answer);
 private :
     int x_;
     int y_;
