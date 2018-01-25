@@ -74,9 +74,7 @@ void Client::connectToServer() {
 
 void Client::sendExercise(char move[]) {
 // Write the exercise arguments to the socket
-    cout<<"sending"<<endl;
-    cout<<move<<endl;
-    int n = write(clientSocket, move, SIZEOF);
+    long n = write(clientSocket, move, SIZEOF);
     if (n == -1) {
         throw "Error writing arg1 to socket";
     }

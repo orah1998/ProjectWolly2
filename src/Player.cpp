@@ -125,7 +125,6 @@ char* Player::makeMove(int** offers,int size) {
     this->cells[x][y].ChangeValue(symbol);
     indexX = x;
     indexY = y;
-    cout << "now for command: " << command << endl;
 
     return command;
 }

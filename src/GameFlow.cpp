@@ -45,7 +45,7 @@ void GameFlow::deleteAll(Board b,GameLogics logic) {
 }
 
 void GameFlow::run() {
-    int x=8;
+    int x=4;
     cout << "Welcome to Reversi!!!!!! " << endl;
     Board b(x);
     CellCollection cellCollection = CellCollection(b.getArrayOfCells(), b.getSizeOfArray());
@@ -142,8 +142,9 @@ void GameFlow::run() {
                 logic.NextMove(player1->getSymbol());
                 checker.GetCounter(logic.GetSizeOfOffers());
                 if (checker.checkWinner() == true) {
-                    flag = 2;
-                    splayer.sendToServer("-1");
+                    flag = 2;char
+                            move[]="close game game";
+                    splayer.sendToServer(move);
                 } else {
                     logic.PrintOffers();
                     if (logic.GetSizeOfOffers() != 0) {
@@ -158,7 +159,8 @@ void GameFlow::run() {
                         splayer.sendToServer(move);
                     }else{
                         //tells the server that this player has no available moves!
-                        splayer.sendToServer("-1");
+                        char move[]="close game game";
+                        splayer.sendToServer(move);
                         flag=1;
                     }
                 }
@@ -170,7 +172,8 @@ void GameFlow::run() {
                 checker.GetCounter(logic.GetSizeOfOffers());
                 if (checker.checkWinner() == true) {
                     flag = 2;
-                    splayer.sendToServer("-1");
+                    char move[]="close game game";
+                    splayer.sendToServer(move);
                 } else {
                     //reads the remote player's move
                     splayer.readFromServer();
@@ -186,9 +189,16 @@ void GameFlow::run() {
                     }
                 }
             }
+            if(flag!=2){
             b.print();
-
+            }
         }
 
+
+
+
     }
+
+
+
 }

@@ -34,8 +34,8 @@ bool Winner::checkWinner() {
     int xCount=0;
     int oCount=0;
 if(counter==0){
-    for (int i = 1; i < size; i++) {
-        for (int j =1 ; j < size; j++) {
+    for (int i = 0; i < size; i++) {
+        for (int j =0 ; j < size; j++) {
             if(cells[i][j].GetValue()=='O'){
                 oCount++;
             }
@@ -46,10 +46,10 @@ if(counter==0){
     }
 
     if(oCount>xCount){
-        cout<<(*player1).GetName()<<" has won !"<<endl;
+        cout<<"Oi has won !"<<endl;
     }
     if(oCount<xCount){
-        cout<<(*player2).GetName()<<" has won !"<<endl;
+        cout<<"Xi has won !"<<endl;
     }
     if(oCount==xCount){
         cout<<" its a TIE !"<<endl;
